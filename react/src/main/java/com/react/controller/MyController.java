@@ -1,6 +1,8 @@
 package com.react.controller;
 
+import com.react.entity.Img;
 import com.react.entity.User;
+import com.react.service.ImgService;
 import com.react.service.UserService;
 import com.react.utils.ResponseData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,9 @@ public class MyController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private ImgService imgService;
+
     /**
      *
      * @param request
@@ -55,6 +60,28 @@ public class MyController {
         return ResponseData.creatResponseData(userList);
     }
 
+    /**
+     *
+     * @return
+     */
+    @RequestMapping("/selectAllImg")
+    @ResponseBody
+    Map selectAllImg() {
+        List<Img> imgList = imgService.selectAllImg();
+        return ResponseData.creatResponseData(imgList);
+    }
+
+
+
+    /**
+     *
+     * @return
+     */
+    @RequestMapping("/test")
+    @ResponseBody
+    String test() {
+        return "{\"message\":\"success\"}";
+    }
 
 }
 
