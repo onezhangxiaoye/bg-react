@@ -15,6 +15,13 @@
       *
     from user
   </select>
+  <!-- 根据 用户名 查询用户数据 -->
+  <select id="selectByUserName" resultType="com.react.entity.User" parameterType="String" >
+    select
+      *
+    from user
+    where name = #{name}
+  </select>
 
 
 </mapper>

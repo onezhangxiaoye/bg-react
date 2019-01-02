@@ -20,4 +20,11 @@ public interface UserMapper {
      * @return 结果集合
      */
     List<User> selectAllData();
+
+    /**根据 用户名 查询用户数据
+     *
+     * @param name 用户名
+     * @return 某一个对象
+     */
+    User selectByUserName(String name);
 }

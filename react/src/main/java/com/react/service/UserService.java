@@ -29,4 +29,9 @@ public class UserService implements UserMapper {
     public List<User> selectAllData() {
         return userMapper.selectAllData();
     }
+
+    @Override
+    public User selectByUserName(String name) {
+        return userMapper.selectByUserName(name);
+    }
 }
