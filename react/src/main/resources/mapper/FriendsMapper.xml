@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.react.pojo.FriendsMapper" >
+
+  <!-- 查询当前用户的所有好友 -->
+  <select id="selectAllFriends" resultType="com.react.entity.Url" >
+    select
+      *
+    from url
+  </select>
+
+  <!-- 添加好友 -->
+  <insert  id="addUrl" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="com.react.entity.Url" >
+    insert into
+        url
+      values
+        (null,#{to},#{name},#{tagFatherId},#{number},#{hidden},null,null)
+  </insert>
+
+  <!-- 根据id 修改导航栏列表数据 -->
+  <update  id="updateUrlById"  parameterType="com.react.entity.Url" >
+    update
+        url
+    set
+      `to` = #{to},
+      `name` = #{name},
+      `tagFatherId` = #{tagFatherId},
+      `number` = #{number},
+      `hidden` = #{hidden}
+    where
+        id = #{id}
+  </update>
+
+</mapper>

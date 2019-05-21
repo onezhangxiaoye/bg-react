@@ -34,4 +34,9 @@ public class UserService implements UserMapper {
     public User selectByUserName(String name) {
         return userMapper.selectByUserName(name);
     }
+
+    @Override
+    public int register(User user) {
+        return userMapper.register(user);
+    }
 }

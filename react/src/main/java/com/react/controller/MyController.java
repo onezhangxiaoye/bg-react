@@ -1,7 +1,6 @@
 package com.react.controller;
 
 import com.react.entity.Img;
-import com.react.entity.Test;
 import com.react.entity.User;
 import com.react.service.ImgService;
 import com.react.service.TestService;
@@ -86,20 +85,23 @@ public class MyController {
     @ResponseBody
     Map test(HttpServletRequest request) {
         System.out.println(request.getParameter("comment"));
-        Test test = new Test();
-//        test.setId(1);
-        test.setName("白菜");
-        test.setDep(20);
-        test.setBirthday(30);
-        test.setPic_name("白菜.png");
-        int i;
-        try {
-            i = testService.addTest(test);
-            System.out.println(i + "---------");
-            return ResponseData.creatResponseDataError("测试请求添加数据成功");
-        }catch (Exception e){
-            return ResponseData.creatResponseDataError("保存参数时出现异常");
-        }
+        System.out.println(request.getParameter("data"));
+        System.out.println(request.getParameter("phone"));
+//        Test test = new Test();
+////        test.setId(1);
+//        test.setName("白菜");
+//        test.setDep(20);
+//        test.setBirthday(30);
+//        test.setPic_name("白菜.png");
+//        int i;
+//        try {
+//            i = testService.addTest(test);
+//            System.out.println(i + "---------");
+//            return ResponseData.creatResponseDataError("测试请求添加数据成功");
+//        }catch (Exception e){
+//            return ResponseData.creatResponseDataError("保存参数时出现异常");
+//        }
+        return ResponseData.creatResponseDataError("测试请求添加数据成功");
     }
 }
 

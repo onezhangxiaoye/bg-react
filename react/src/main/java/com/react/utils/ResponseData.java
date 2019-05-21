@@ -19,7 +19,7 @@ public class ResponseData {
      */
     public static Map creatResponseData(Object o){
         Map<String,Object> map = new HashMap();
-        map.put("status",200);
+        map.put("status",0);
         map.put("data",o);
         map.put("message","success");
         return map;
@@ -32,7 +32,7 @@ public class ResponseData {
      */
     public static Map creatResponseDataError(String message){
         Map<String,Object> map = new HashMap();
-        map.put("status",300);
+        map.put("status",20);
         map.put("message",message);
         return map;
     }

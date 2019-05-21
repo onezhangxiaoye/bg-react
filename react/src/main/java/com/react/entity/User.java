@@ -2,25 +2,24 @@ package com.react.entity;
 
 public class User {
     private Integer id;
-
     private String name;
-
     private String password;
+    private String picName;
+    private String accessLevel;
+    private String email;
+    private String reserve3;
 
-    private String group_id;
+    public User() {
+    }
 
-    private String pic_name;
-
-    public User(Integer id, String name, String password, String group_id, String pic_name) {
+    public User(Integer id, String name, String password, String picName, String accessLevel, String email, String reserve3) {
         this.id = id;
         this.name = name;
         this.password = password;
-        this.group_id = group_id;
-        this.pic_name = pic_name;
-    }
-
-    public User() {
-        super();
+        this.picName = picName;
+        this.accessLevel = accessLevel;
+        this.email = email;
+        this.reserve3 = reserve3;
     }
 
     public Integer getId() {
@@ -36,7 +35,7 @@ public class User {
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
     public String getPassword() {
@@ -44,22 +43,38 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+        this.password = password;
     }
 
-    public String getGroup_id() {
-        return group_id;
+    public String getPicName() {
+        return picName;
     }
 
-    public void setGroup_id(String group_id) {
-        this.group_id = group_id == null ? null : group_id.trim();
+    public void setPicName(String picName) {
+        this.picName = picName;
     }
 
-    public String getPic_name() {
-        return pic_name;
+    public String getAccessLevel() {
+        return accessLevel;
     }
 
-    public void setPic_name(String pic_name) {
-        this.pic_name = pic_name == null ? null : pic_name.trim();
+    public void setAccessLevel(String accessLevel) {
+        this.accessLevel = accessLevel;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getReserve3() {
+        return reserve3;
+    }
+
+    public void setReserve3(String reserve3) {
+        this.reserve3 = reserve3;
     }
 }

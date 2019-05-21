@@ -27,4 +27,10 @@ public interface UserMapper {
      * @return 某一个对象
      */
     User selectByUserName(String name);
+
+    /**注册用户信息
+     *
+     * @param user 用户对象
+     */
+    int register(User user);
 }

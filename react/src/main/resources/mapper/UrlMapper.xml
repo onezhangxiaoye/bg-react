@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.react.pojo.UrlMapper" >
+
+  <!-- 查询所有系统路径配置数据 -->
+  <select id="selectAllData" resultType="com.react.entity.Url" >
+    select
+      *
+    from url
+  </select>
+  <!-- 新增导航栏列表数据 -->
+  <!-- 下面这行代码 可以自动把主键id值更新到 插入的对象中 -->
+  <!-- useGeneratedKeys="true" keyColumn="id" keyProperty="id" -->
+  <insert  id="addUrl" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="com.react.entity.Url" >
+    insert into
+        url
+      values
+        (null,#{to},#{name},#{tagFatherId},#{number},#{hidden},null,null)
+  </insert>
+
+  <!-- 根据id 修改导航栏列表数据 -->
+  <update  id="updateUrlById"  parameterType="com.react.entity.Url" >
+    update
+        url
+    set
+      `to` = #{to},
+      `name` = #{name},
+      `tagFatherId` = #{tagFatherId},
+      `number` = #{number},
+      `hidden` = #{hidden}
+    where
+        id = #{id}
+  </update>
+
+</mapper>
