@@ -34,7 +34,7 @@ public class FileUpload {
             file.transferTo(dest);
             System.out.println("上传成功");
             //成功返回文件名称
-            return StaticDataName.IMGPATH + fileName2;
+            return fileName2;
         } catch (IOException e) {
             System.out.println(e.toString());
         }

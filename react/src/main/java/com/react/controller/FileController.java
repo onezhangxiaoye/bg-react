@@ -14,6 +14,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.slf4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -73,8 +77,42 @@ public class FileController {
 
         String imgPath = FileUpload.fileUpload(file);
         if (!imgPath.equals("error")){
-            return ResponseData.creatResponseData("图片上传成功！" + imgPath);
+            Map<String,Object> map = new HashMap<>();
+            map.put("imgName",imgPath);
+            return ResponseData.creatResponseData(map);
         }
         return ResponseData.creatResponseDataError("图片上传失败！");
     }
+
+
+    /** 单图片上传
+     *
+     * @param
+     * @return
+     */
+    @RequestMapping("/addBolg")
+    @ResponseBody
+    Map addBolg(HttpServletRequest request) {
+
+        BufferedWriter out = null;
+
+        try {
+            out = new BufferedWriter(new FileWriter("runoob.txt"));
+            out.write("菜鸟教程");
+            out.close();
+            System.out.println("文件创建成功！");
+        } catch (IOException e) {
+
+        }finally {
+            try {
+                out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return ResponseData.creatResponseDataError("图片上传失败！");
+    }
+
+
+
 }
