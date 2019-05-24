@@ -85,32 +85,22 @@ public class FileController {
     }
 
 
-    /** 单图片上传
+    /** 通过博客存储文件名 获取博客内容
      *
      * @param
      * @return
      */
-    @RequestMapping("/addBolg")
+    @RequestMapping("/getBolg")
     @ResponseBody
     Map addBolg(HttpServletRequest request) {
-
-        BufferedWriter out = null;
-
-        try {
-            out = new BufferedWriter(new FileWriter("runoob.txt"));
-            out.write("菜鸟教程");
-            out.close();
-            System.out.println("文件创建成功！");
-        } catch (IOException e) {
-
-        }finally {
-            try {
-                out.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        String blogFileName = request.getParameter("blogFileName");
+        String markdownText = FileUpload.readMarkdown(blogFileName);
+        if (!markdownText.equals("error")){
+            Map<String,Object> map = new HashMap<>();
+            map.put("markdownText",markdownText);
+            return ResponseData.creatResponseData(map);
         }
-        return ResponseData.creatResponseDataError("图片上传失败！");
+        return ResponseData.creatResponseDataError("获取博客内容失败！");
     }
 
 

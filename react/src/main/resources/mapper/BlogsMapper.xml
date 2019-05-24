@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.react.pojo.BlogsMapper" >
+
+    <!-- 插入一条 博客 信息数据 -->
+  <insert id="addBlog" parameterType="com.react.entity.Blogs" >
+      insert into
+        blogs
+        (userId,blogFileName,blogTitle,blogTimestamp)
+      values
+        (#{userId}, #{blogTypeId},#{blogFileName},#{blogTitle},#{blogContent},#{blogTimestamp}, #{blogStatus})
+  </insert>
+
+    <!-- 查询某个用户的 所有博客信息 -->
+    <select id="selectBlogsByUserId" resultType="com.react.entity.Blogs">
+        select
+          blogId,userId,blogFileName,blogTitle,blogContent,blogTimestamp
+        from
+          blogs
+        where
+          userId = #{param1}
+          and
+          blogTypeId = #{param2}
+          and
+          blogStatus = #{param3}
+    </select>
+
+    <!-- 通过博客id查询博客详细信息 -->
+    <select id="selectBlogsByBlogId" resultType="com.react.entity.Blogs">
+        SELECT
+          blogId,userId,blogFileName,blogTitle,blogTimestamp
+        FROM
+          blogs
+        WHERE
+          blogId = #{blogId}
+    </select>
+</mapper>
