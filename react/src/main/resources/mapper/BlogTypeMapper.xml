@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.react.pojo.BlogTypeMapper">
+  <resultMap id="BaseResultMap" type="com.react.entity.BlogType">
+    <id column="blogTypeId" jdbcType="INTEGER" property="blogTypeId" />
+    <result column="blogTypeTitle" jdbcType="VARCHAR" property="blogTypeTitle" />
+    <result column="blogTypeDescription" jdbcType="VARCHAR" property="blogTypeDescription" />
+    <result column="blogTypeStatus" jdbcType="INTEGER" property="blogTypeStatus" />
+    <result column="reserve" jdbcType="VARCHAR" property="reserve" />
+  </resultMap>
+  <!-- 查询对应状态的博客类型 -->
+  <select id="selectAll" resultMap="BaseResultMap">
+    select 
+      *
+    from blogtype
+    where blogTypeStatus != #{param1,jdbcType=INTEGER}
+  </select>
+</mapper>

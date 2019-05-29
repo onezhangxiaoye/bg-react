@@ -4,6 +4,7 @@ import com.react.entity.Blogs;
 import com.react.service.BlogsService;
 import com.react.utils.FileUpload;
 import com.react.utils.ResponseData;
+import com.react.utils.StaticDataName;
 import com.react.utils.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,26 +44,36 @@ public class BlogsController {
     @RequestMapping("/addBlog")
     @ResponseBody
     Map addBlog(HttpServletRequest request) {
+        String pass = request.getParameter("pass");
+        System.out.print(pass);
+        if (pass.equals(StaticDataName.PASS)){
+            String markdown = request.getParameter("markdown");
 
-        String markdown = request.getParameter("markdown");
+            String fileName = FileUpload.saveMarkdown(markdown);
+            if (!fileName.equals("error")){
+                String userId = request.getParameter("userId");
+                String blogTypeId = request.getParameter("blogTypeId");
+                String blogTitle = request.getParameter("blogTitle");
+                String _blogTimestamp = request.getParameter("blogTimestamp");
+                String blogStatus = request.getParameter("blogStatus");
+                LocalDateTime blogTimestamp = TimeUtil.parseDateTime(_blogTimestamp);
+                String blogContent = "";
+                if (markdown.length() > StaticDataName.CUT_OUT_FONT_NUMBER){
+                    blogContent = markdown.substring(StaticDataName.CUT_OUT_FONT_NUMBER);
+                }else{
+                    blogContent = markdown;
+                }
 
-        String fileName = FileUpload.saveMarkdown(markdown);
-        if (!fileName.equals("error")){
-            String userId = request.getParameter("userId");
-            String blogTypeId = request.getParameter("blogTypeId");
-            String blogTitle = request.getParameter("blogTitle");
-            String _blogTimestamp = request.getParameter("blogTimestamp");
-            String blogStatus = request.getParameter("blogStatus");
-            LocalDateTime blogTimestamp = TimeUtil.parseDateTime(_blogTimestamp);
-            String blogContent = "";
+                Blogs blog = new Blogs(Integer.valueOf(userId),Integer.valueOf(blogTypeId),fileName,blogTitle,blogContent,blogTimestamp,Integer.valueOf(blogStatus));
 
-            Blogs blog = new Blogs(Integer.valueOf(userId),Integer.valueOf(blogTypeId),fileName,blogTitle,blogContent,blogTimestamp,Integer.valueOf(blogStatus));
+                blogsService.addBlog(blog);
 
-            blogsService.addBlog(blog);
-
-            return ResponseData.creatResponseData(null);
+                return ResponseData.creatResponseData(null);
+            }
+            return ResponseData.creatResponseDataError("发布失败！");
+        }else{
+            return ResponseData.creatResponseDataError("通行证验证错误！");
         }
-        return ResponseData.creatResponseDataError("发布失败！");
 
     }
 

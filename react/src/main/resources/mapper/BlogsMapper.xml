@@ -6,7 +6,7 @@
   <insert id="addBlog" parameterType="com.react.entity.Blogs" >
       insert into
         blogs
-        (userId,blogFileName,blogTitle,blogTimestamp)
+        (userId,blogTypeId,blogFileName,blogTitle,blogContent,blogTimestamp,blogStatus)
       values
         (#{userId}, #{blogTypeId},#{blogFileName},#{blogTitle},#{blogContent},#{blogTimestamp}, #{blogStatus})
   </insert>

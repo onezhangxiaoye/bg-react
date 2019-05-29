@@ -4,6 +4,7 @@ import com.react.entity.Img;
 import com.react.service.FileService;
 import com.react.utils.FileUpload;
 import com.react.utils.ResponseData;
+import com.react.utils.StaticDataName;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -73,15 +74,19 @@ public class FileController {
      */
     @RequestMapping("/onefileUpload")
     @ResponseBody
-    Map onefileUpload(@RequestParam("file") MultipartFile file) {
-
-        String imgPath = FileUpload.fileUpload(file);
-        if (!imgPath.equals("error")){
-            Map<String,Object> map = new HashMap<>();
-            map.put("imgName",imgPath);
-            return ResponseData.creatResponseData(map);
+    Map onefileUpload(@RequestParam("file") MultipartFile file,HttpServletRequest request) {
+        String pass = request.getParameter("pass");
+        if (pass.equals(StaticDataName.PASS)){
+            String imgPath = FileUpload.fileUpload(file);
+            if (!imgPath.equals("error")){
+                Map<String,Object> map = new HashMap<>();
+                map.put("imgName",imgPath);
+                return ResponseData.creatResponseData(map);
+            }
+            return ResponseData.creatResponseDataError("图片上传失败！");
+        }else{
+            return ResponseData.creatResponseDataError("通行证验证错误！");
         }
-        return ResponseData.creatResponseDataError("图片上传失败！");
     }
 
 

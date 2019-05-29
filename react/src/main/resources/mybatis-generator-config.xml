@@ -5,18 +5,19 @@
 <generatorConfiguration>
 
     <!-- 本地数据库驱动程序jar包的全路径 -->
-    <classPathEntry location="C:\Users\Administrator\.m2\repository\mysql\mysql-connector-java\5.1.46\mysql-connector-java-5.1.46.jar"/>
+    <classPathEntry location="D:\soft\apache-maven-repo\repository\mysql\mysql-connector-java\5.1.46\mysql-connector-java-5.1.46.jar"/>
 
     <!-- 指定mybatis版本 -->
     <context id="context" targetRuntime="MyBatis3">
+        <!-- 取消注释 -->
         <commentGenerator>
-            <property name="suppressAllComments" value="false"/>
+            <property name="suppressAllComments" value="true"/>
             <property name="suppressDate" value="true"/>
         </commentGenerator>
 
         <!-- 数据库的相关配置 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/react"
+                        connectionURL="jdbc:mysql://localhost:3306/react?useSSL=false"
                         userId="root"
                         password="1234"/>
 
@@ -26,25 +27,28 @@
         </javaTypeResolver>
 
         <!-- 实体类生成的位置  修改targetPackage和targetProject-->
-        <javaModelGenerator targetPackage="cn.react.entity" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.react.test" targetProject="src/main/java">
             <property name="enableSubPackages" value="false"/>
-            <property name="trimStrings" value="true"/>
+            <property name="trimStrings" value="false"/>
         </javaModelGenerator>
 
         <!-- *Mapper.xml 文件的位置  修改targetPackage和targetProject-->
-        <sqlMapGenerator targetPackage="cn.react.mapper" targetProject="src/main/java">
+        <sqlMapGenerator targetPackage="com.react.test" targetProject="src/main/java">
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
 
         <!-- Mapper 接口文件的位置  修改targetPackage和targetProject-->
-        <javaClientGenerator targetPackage="cn.react.pojo" targetProject="src/main/java"
+        <javaClientGenerator targetPackage="com.react.test" targetProject="src/main/java"
                              type="XMLMAPPER">
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
         <!-- 相关表的配置 多表就配置多个  tableName表名  domainObjectName类名 -->
-        <table tableName="react" domainObjectName="User" enableCountByExample="false"
+        <table tableName="BlogType" domainObjectName="BlogType" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false"/>
+               enableUpdateByExample="false">
+            <!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+            <property name="useActualColumnNames" value="true"/>
+        </table>
     </context>
 </generatorConfiguration>
